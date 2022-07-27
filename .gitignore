@@ -1,0 +1,8 @@
+
+.env
+.vscode/**
+
+
+tracking/**
+*.bin
+*.pkl
