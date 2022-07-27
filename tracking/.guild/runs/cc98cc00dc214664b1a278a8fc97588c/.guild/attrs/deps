@@ -1,0 +1,13 @@
+prepare_task2_stance:
+  operation:prepare_task2_stance:
+    config: 66142fb128694006bdd49264dd6f3e8b
+    paths:
+    - ../66142fb128694006bdd49264dd6f3e8b/prepared/task2_test.tsv
+    uri: operation:prepare_task2_stance
+train:
+  operation:train:
+    config: e21e499257324d6381c27d5918f092fe
+    paths:
+    - ../e21e499257324d6381c27d5918f092fe/checkpoints/best/config.json
+    - ../e21e499257324d6381c27d5918f092fe/checkpoints/best/pytorch_model.bin
+    uri: operation:train

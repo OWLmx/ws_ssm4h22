@@ -1,0 +1,7 @@
+remotes:
+   idsia_hpc:
+     type: ssh 
+     host: idsia_hpc
+     conda-env: py38ptpl
+     guild-home: /home/serrano/projects/n2c2/tracking/.guild
+ 

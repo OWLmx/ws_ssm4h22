@@ -1,0 +1,7 @@
+architecture: 64bit ELF
+cpus: 8
+processor: x86_64
+python_version: 3.8.12 | packaged by conda-forge | (default, Oct 12 2021, 21:59:51)
+  [GCC 9.4.0]
+uname: 'Linux xuluc 5.13.0-52-generic #59-Ubuntu SMP Wed Jun 15 20:17:13 UTC 2022
+  x86_64 x86_64'

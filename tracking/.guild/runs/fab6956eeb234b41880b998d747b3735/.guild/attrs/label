@@ -1,0 +1,4 @@
+"data_official_test joint_sentclaim_premise stance task2 two-stage input_features=Claim2,tweet_text_clean\
+  \ label_mapper='' model_path=/home/\u2026/best.ckpt model_type=digitalepidemiologylab/covid-twitter-bert-v2\
+  \ num_labels=3 output_logits=yes prepare_task2_stance=b5f1562d469847d5a396c59fffbf839f\
+  \ rs_prefix=stance_ t10sec=no tgtdata_path=prepared/task2_test.tsv train=2b3bddece32c470c9f62fd394952c472"

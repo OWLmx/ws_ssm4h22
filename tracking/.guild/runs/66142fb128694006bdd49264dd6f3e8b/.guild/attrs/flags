@@ -1,0 +1,5 @@
+dataset_type: officialtest_as_nli
+for_inference: false
+in_path: /home/owlmx/research/comps/SMM4H22/data/input/task2/official_test
+out_path: prepared
+t10sec: false

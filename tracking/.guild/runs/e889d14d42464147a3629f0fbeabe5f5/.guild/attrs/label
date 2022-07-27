@@ -1,0 +1,7 @@
+"task2 stance two-stage data_covidlies-official adam_epsilon=0.001 auto_lr_find=no\
+  \ data_dirpath=prepared data_filename_prefix=task2_ data_filename_type=tsv encoder_learning_rate=1.0e-05\
+  \ eval_batch_size=32 gpus='0' learning_rate=1.0e-05 logs_path=tracking/tensorboard_logs\
+  \ max_epochs=10 max_seq_length=160 model_name_or_path=/home/\u2026/best patience=3\
+  \ prepare_task2_stance=e63d44cad9bd43bd987b3e3e6ff7c889 stratified_batch_sampling=yes\
+  \ t10sec=0 task_name=sentclaim tokenizer_type=digitalepidemiologylab/covid-twitter-bert-v2\
+  \ train_batch_size=8 use_weights_of='' warmup_steps=0"

@@ -1,0 +1,15 @@
+prepare_task2_stance:
+  operation:prepare_task2_stance:
+    config: 7abbe21a34b14b7d9e4939128a374892
+    paths:
+    - ../7abbe21a34b14b7d9e4939128a374892/prepared/covidlies_train.tsv
+    - ../7abbe21a34b14b7d9e4939128a374892/prepared/covidlies_valid.tsv
+    uri: operation:prepare_task2_stance
+train:
+  operation:train:
+    config: e889d14d42464147a3629f0fbeabe5f5
+    paths:
+    - ../e889d14d42464147a3629f0fbeabe5f5/checkpoints/best/config.json
+    - ../e889d14d42464147a3629f0fbeabe5f5/checkpoints/best/label_encoder.pkl
+    - ../e889d14d42464147a3629f0fbeabe5f5/checkpoints/best/pytorch_model.bin
+    uri: operation:train

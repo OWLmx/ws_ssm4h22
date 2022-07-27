@@ -1,0 +1,11 @@
+input_features: Claim2,tweet_text_clean
+label_mapper: 0|AGAINST,1|FAVOR,2|NONE
+model_path: model
+model_type: digitalepidemiologylab/covid-twitter-bert-v2
+num_labels: 3
+output_logits: true
+prepare_task2_stance: b5f1562d469847d5a396c59fffbf839f
+rs_prefix: ''
+t10sec: false
+tgtdata_path: prepared/task2_test.tsv
+train: e889d14d42464147a3629f0fbeabe5f5

@@ -1,0 +1,5 @@
+inference: febedf66f2394b7191958ae1d524588b
+original_data: /home/owlmx/research/comps/SMM4H22/data/input/task2/official_test/test.tsv
+prediction_data: predictions.tsv
+subtask: 2a
+t10sec: false

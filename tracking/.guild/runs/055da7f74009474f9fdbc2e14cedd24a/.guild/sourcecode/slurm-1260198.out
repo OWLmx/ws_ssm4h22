@@ -1,0 +1,188 @@
+[stance1:train] Activating env....
+Activating env [py38ptpl]
+guild_version:             0.8.0
+guild_install_location:    /home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/guild
+guild_home:                /home/serrano/projects/SMM4H22/tracking/.guild
+guild_resource_cache:      /home/serrano/projects/SMM4H22/tracking/.guild/cache/resources
+installed_plugins:         config_flags, cpu, dask, disk, dvc, exec_script, gpu, ipynb, keras, memory, perf, python_script, queue, skopt
+python_version:            3.8.13 (default, Mar 28 2022, 11:38:47) [GCC 7.5.0]
+python_exe:                /home/serrano/miniconda3/envs/py38ptpl/bin/python
+platform:                  Linux 4.18.0-193.el8.x86_64 x86_64
+psutil_version:            5.8.0
+tensorboard_version:       2.6.0
+cuda_version:              11.4
+nvidia_smi_version:        470.82.01
+latest_guild_version:      0.8.1
+A newer version of Guild AI is available. Run 'pip install guildai --upgrade' to install it.
+*** Check tha [guild_home] is correctly set ***
+===============================================
+*** Available operations (execute _guild help_ for more info) ***
+Refreshing flags...
+WARNING: cannot import flags from src/stance_preprocess.py: ModuleNotFoundError: No module named 'fasttext' (run with guild --debug for details)
+WARNING: cannot import flags from src/prepare_txts.py: ModuleNotFoundError: No module named 'negspacy' (run with guild --debug for details)
+prepare_data                      Generate Dataframes with hydrated examples from previously processed splits, texts, annotations
+prepare_splits                    Create a summary table with reference to all files and assign a split to each entry
+prepare_submission                from predictions in DF (subtask 2 & 3 ) generate ann files for submission
+prepare_task2_stance              Prepare official training data for stance Task2
+prepare_texts                     Preprocess txt files (clean, segment, etc.)
+base-model:evaluate               Run official evalation script
+stance1:inference                 apply transforemr
+stance1:inference-sentiment       apply transforemr
+stance1:pipeline_inference_event  
+stance1:train                     Train model Transformer based classifier
+Running script ....
+New Run
+Refreshing flags...
+WARNING: cannot import flags from src/stance_preprocess.py: ModuleNotFoundError: No module named 'fasttext' (run with guild --debug for details)
+WARNING: cannot import flags from src/prepare_txts.py: ModuleNotFoundError: No module named 'negspacy' (run with guild --debug for details)
+Resolving prepare_task2_stance dependency
+Using run 6d4c5793a53c4ff2bf830020a0248f0f for prepare_task2_stance resource
+INFO: [numexpr.utils] Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+INFO: [numexpr.utils] NumExpr defaulting to 8 threads.
+INFO: [pytorch_lightning.utilities.seed] Global seed set to 42
+Reading dataset.
+**Training Data size: 1351
+Prepared for [0] extra features
+
+========= Classifier:: NumLabels [3] ================
+Some weights of the model checkpoint at microsoft/deberta-large-mnli were not used when initializing DebertaForSequenceClassification: ['config']
+- This IS expected if you are initializing DebertaForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing DebertaForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Configuring TensorLogger output to --> /home/serrano/projects/SMM4H22/tracking/tensorboard_logs
+INFO: [pytorch_lightning.utilities.rank_zero] Multiprocessing is handled by SLURM.
+INFO: [pytorch_lightning.utilities.rank_zero] GPU available: True, used: True
+INFO: [pytorch_lightning.utilities.rank_zero] TPU available: False, using: 0 TPU cores
+INFO: [pytorch_lightning.utilities.rank_zero] IPU available: False, using: 0 IPUs
+INFO: [pytorch_lightning.utilities.rank_zero] HPU available: False, using: 0 HPUs
+INFO: [root] ... Setup [fit]
+Reading dataset.
+INFO: [root] 
+---- Mapping split [train] -----
+  0%|          | 0/2 [00:00<?, ?ba/s] 50%|█████     | 1/2 [00:00<00:00,  2.23ba/s]100%|██████████| 2/2 [00:00<00:00,  4.00ba/s]100%|██████████| 2/2 [00:00<00:00,  3.56ba/s]
+INFO: [root] 
+---- Mapping split [validation] -----
+  0%|          | 0/1 [00:00<?, ?ba/s]100%|██████████| 1/1 [00:00<00:00,  5.82ba/s]100%|██████████| 1/1 [00:00<00:00,  5.82ba/s]
+--> SetUp
+/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py:2203: LightningDeprecationWarning: `Trainer.gpus` was deprecated in v1.6 and will be removed in v1.8. Please use `Trainer.num_devices` or `Trainer.device_ids` to get device information instead.
+  rank_zero_deprecation(
+INFO: [pytorch_lightning.accelerators.gpu] LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+*** Prepare optimizer and schedule (linear warmup and decay)  ***
+Optimizer LR: 1e-05 EPS: 0.001
+Only Optimizer
+INFO: [pytorch_lightning.callbacks.model_summary] 
+  | Name             | Type                             | Params
+----------------------------------------------------------------------
+0 | model            | DebertaForSequenceClassification | 406 M 
+1 | metric_train_acc | Accuracy                         | 0     
+2 | metric_train_f1  | F1                               | 0     
+3 | metric_val_acc   | Accuracy                         | 0     
+4 | metric_val_f1    | F1                               | 0     
+5 | metric_test_acc  | Accuracy                         | 0     
+6 | metric_test_f1   | F1                               | 0     
+----------------------------------------------------------------------
+406 M     Trainable params
+0         Non-trainable params
+406 M     Total params
+1,624.863 Total estimated model params size (MB)
+INFO: [pytorch_lightning.trainer.connectors.signal_connector] SLURM auto-requeueing enabled. Setting signal handlers.
+Sanity Checking: 0it [00:00, ?it/s]Sanity Checking DataLoader 0:   0%|          | 0/2 [00:00<?, ?it/s]<class 'torch.Tensor'> | torch.float32
+Sanity Checking DataLoader 0:  50%|█████     | 1/2 [00:01<00:01,  1.18s/it]<class 'torch.Tensor'> | torch.float32
+Sanity Checking DataLoader 0: 100%|██████████| 2/2 [00:01<00:00,  1.16it/s]                                                                           INFO: [plibs.estimators.stance_datamodule] Using stratified batch sampling for training DataLoader.
+Training: 0it [00:00, ?it/s]Epoch 0:   0%|          | 0/370 [00:00<?, ?it/s]Epoch 0:   0%|          | 1/370 [00:00<05:20,  1.15it/s]Epoch 0:   0%|          | 1/370 [00:00<05:20,  1.15it/s, loss=1.15, v_num=a74b]Traceback (most recent call last):
+  File "/home/serrano/projects/SMM4H22/tracking/.guild/runs/83c4a74b1d034c8789a81675df99b6c4/.guild/sourcecode/src/seqcls_transformer_train.py", line 202, in <module>
+    main(args)
+  File "/home/serrano/projects/SMM4H22/tracking/.guild/runs/83c4a74b1d034c8789a81675df99b6c4/.guild/sourcecode/src/seqcls_transformer_train.py", line 141, in main
+    trainer.fit(model, data) # ckpt_path (Optional[str]) – Path/URL of the checkpoint from which training is resumed
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 771, in fit
+    self._call_and_handle_interrupt(
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 724, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 812, in _fit_impl
+    results = self._run(model, ckpt_path=self.ckpt_path)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1237, in _run
+    results = self._run_stage()
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1324, in _run_stage
+    return self._run_train()
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1354, in _run_train
+    self.fit_loop.run()
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/base.py", line 204, in run
+    self.advance(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/fit_loop.py", line 269, in advance
+    self._outputs = self.epoch_loop.run(self._data_fetcher)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/base.py", line 204, in run
+    self.advance(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/epoch/training_epoch_loop.py", line 208, in advance
+    batch_output = self.batch_loop.run(batch, batch_idx)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/base.py", line 204, in run
+    self.advance(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/batch/training_batch_loop.py", line 88, in advance
+    outputs = self.optimizer_loop.run(split_batch, optimizers, batch_idx)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/base.py", line 204, in run
+    self.advance(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 203, in advance
+    result = self._run_optimization(
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 256, in _run_optimization
+    self._optimizer_step(optimizer, opt_idx, batch_idx, closure)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 369, in _optimizer_step
+    self.trainer._call_lightning_module_hook(
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1596, in _call_lightning_module_hook
+    output = fn(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/core/lightning.py", line 1625, in optimizer_step
+    optimizer.step(closure=optimizer_closure)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/core/optimizer.py", line 168, in step
+    step_output = self._strategy.optimizer_step(self._optimizer, self._optimizer_idx, closure, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/strategies/strategy.py", line 193, in optimizer_step
+    return self.precision_plugin.optimizer_step(model, optimizer, opt_idx, closure, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 155, in optimizer_step
+    return optimizer.step(closure=closure, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torch/optim/optimizer.py", line 88, in wrapper
+    return func(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/transformers/optimization.py", line 322, in step
+    loss = closure()
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 140, in _wrap_closure
+    closure_result = closure()
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 148, in __call__
+    self._result = self.closure(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 134, in closure
+    step_output = self._step_fn()
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 427, in _training_step
+    training_step_output = self.trainer._call_strategy_hook("training_step", *step_kwargs.values())
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1766, in _call_strategy_hook
+    output = fn(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/strategies/strategy.py", line 333, in training_step
+    return self.model.training_step(*args, **kwargs)
+  File "/home/serrano/projects/SMM4H22/tracking/.guild/runs/83c4a74b1d034c8789a81675df99b6c4/.guild/sourcecode/src/plibs/estimators/base_sequence_classifier.py", line 67, in training_step
+    loss, logits = self(**batch)[:2]
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/serrano/projects/SMM4H22/tracking/.guild/runs/83c4a74b1d034c8789a81675df99b6c4/.guild/sourcecode/src/plibs/estimators/base_sequence_classifier.py", line 62, in forward
+    return self.model(**inputs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/transformers/models/deberta/modeling_deberta.py", line 1182, in forward
+    outputs = self.deberta(
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/transformers/models/deberta/modeling_deberta.py", line 955, in forward
+    encoder_outputs = self.encoder(
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/transformers/models/deberta/modeling_deberta.py", line 442, in forward
+    hidden_states = layer_module(
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/transformers/models/deberta/modeling_deberta.py", line 347, in forward
+    attention_output = self.attention(
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/transformers/models/deberta/modeling_deberta.py", line 280, in forward
+    self_output = self.self(
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/transformers/models/deberta/modeling_deberta.py", line 633, in forward
+    rel_att = self.disentangled_att_bias(query_layer, key_layer, relative_pos, rel_embeddings, scale_factor)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/transformers/models/deberta/modeling_deberta.py", line 701, in disentangled_att_bias
+    p2c_att = torch.matmul(key_layer, pos_query_layer.transpose(-1, -2))
+RuntimeError: CUDA out of memory. Tried to allocate 20.00 MiB (GPU 0; 7.93 GiB total capacity; 7.09 GiB already allocated; 4.50 MiB free; 7.22 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Epoch 0:   0%|          | 1/370 [00:03<24:12,  3.94s/it, loss=1.15, v_num=a74b]
+---------- FINALIZED -------------

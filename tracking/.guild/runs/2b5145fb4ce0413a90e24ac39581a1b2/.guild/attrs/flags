@@ -1,0 +1,4 @@
+dataset_type: kglandt_nli
+in_path: /home/owlmx/research/comps/SMM4H22/data/input/task2
+out_path: prepared
+t10sec: false

@@ -1,0 +1,2 @@
+"data_official task2 stance as_nli for_inference dataset_type=kglandt_nli for_inference=yes\
+  \ in_path=/home/\u2026/input/task2 out_path=prepared t10sec=no"

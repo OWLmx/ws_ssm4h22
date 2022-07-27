@@ -1,0 +1,6 @@
+inference:
+  operation:inference:
+    config: febedf66f2394b7191958ae1d524588b
+    paths:
+    - ../febedf66f2394b7191958ae1d524588b/predictions.tsv
+    uri: operation:inference

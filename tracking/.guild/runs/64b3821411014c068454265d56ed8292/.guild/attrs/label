@@ -1,0 +1,3 @@
+"j_sentclaim_prem_sen submission data_official_test joint_sentclaim_premise_plus_sent\
+  \ stance task2 inference=f9ac4fa06c3f4d868198254be95d5339 original_data=/home/\u2026\
+  /test.tsv prediction_data=predictions.tsv subtask=2a t10sec=no yhat_field=stance_labels_yhat"

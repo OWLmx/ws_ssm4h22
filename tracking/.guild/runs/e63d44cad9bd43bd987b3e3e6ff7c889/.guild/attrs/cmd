@@ -1,0 +1,11 @@
+- /home/owlmx/miniconda3/envs/py38ptpl/bin/python3.8
+- -um
+- guild.op_main
+- src/stance_preprocess
+- --
+- --in_path
+- /home/owlmx/research/comps/SMM4H22/data/input/task2
+- --out_path
+- prepared
+- --t10sec
+- ''

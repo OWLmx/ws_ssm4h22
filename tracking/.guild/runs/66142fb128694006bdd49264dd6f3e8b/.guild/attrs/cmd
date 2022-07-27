@@ -1,0 +1,15 @@
+- /home/owlmx/miniconda3/envs/py38ptpl/bin/python3.8
+- -um
+- guild.op_main
+- src/stance_preprocess
+- --
+- --dataset_type
+- officialtest_as_nli
+- --for_inference
+- ''
+- --in_path
+- /home/owlmx/research/comps/SMM4H22/data/input/task2/official_test
+- --out_path
+- prepared
+- --t10sec
+- ''

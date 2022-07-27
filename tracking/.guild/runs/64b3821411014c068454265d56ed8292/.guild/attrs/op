@@ -1,0 +1,32 @@
+delete-on-success: false
+deps:
+- config: f9ac4fa06c3f4d868198254be95d5339
+  location: /home/owlmx/research/comps/SMM4H22
+  name: inference
+  sources:
+  - operation: inference
+    select: predictions\.tsv
+    target-type: link
+flag-null-labels:
+  inference: unspecified
+flags-extra: {}
+label-template: null
+op-cmd:
+  cmd-args:
+  - ${python_exe}
+  - -um
+  - guild.op_main
+  - src/prepare_submission_task2
+  - --
+  - __flag_args__
+  cmd-env:
+    FLAGS_DEST: args
+    GUILD_PLUGINS: ''
+    PROJECT_DIR: /home/owlmx/research/comps/SMM4H22
+  cmd-flags:
+    inference:
+      arg-skip: true
+  flags-dest: args
+output-scalars: null
+python-requires: null
+sourcecode-root: .guild/sourcecode

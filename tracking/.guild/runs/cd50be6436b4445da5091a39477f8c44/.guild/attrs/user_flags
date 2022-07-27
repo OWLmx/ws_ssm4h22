@@ -1,0 +1,2 @@
+rs_prefix: stance_
+tgtdata_path: /home/owlmx/research/comps/SMM4H22/data/prepared/task2_train_predictions.tsv,/home/owlmx/research/comps/SMM4H22/data/prepared/task2_valid_predictions.tsv,/home/owlmx/research/comps/SMM4H22/data/prepared/task2_test_predictions.tsv

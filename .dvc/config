@@ -1,0 +1,5 @@
+[core]
+    remote = maia
+['remote "maia"']
+    url = ssh://user@195.176.73.67/mnt/maia/nlp/dvc/smm4h22
+    ask_password = true

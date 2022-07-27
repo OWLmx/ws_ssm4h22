@@ -1,0 +1,5 @@
+"official_data_test task2 stance two-stage data_covidlies-official enrich_sent extra_features=logits_0,logits_1,logits_2\
+  \ input_features=Claim2,tweet_text_clean label_mapper=0|AGAINST,1|FAVOR,2|NONE model_path=/home/\u2026\
+  /best.ckpt model_type=digitalepidemiologylab/covid-twitter-bert-v2 num_labels=3\
+  \ output_logits=yes prepare_task2_stance=b5f1562d469847d5a396c59fffbf839f rs_prefix=stance_\
+  \ t10sec=no tgtdata_path=/\u2026/predictions.tsv train=e2708f19f2374749a5ec6abbce178f44"

@@ -1,0 +1,2 @@
+"data_official_test task2 stance as_nli for_inference dataset_type=officialtest_as_nli\
+  \ for_inference=no in_path=/\u2026/official_test out_path=prepared t10sec=no"

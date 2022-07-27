@@ -1,0 +1,15 @@
+name: misinfofastcatch
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - pandas
+  - spacy
+  - pytorch-lightning
+  - nltk
+  - scikit-learn
+  - sentence-transformers
+  - matplotlib
+  - seaborn
+  - dvc
+prefix: /home/owlmx/miniconda3/envs/misinfofastcatch

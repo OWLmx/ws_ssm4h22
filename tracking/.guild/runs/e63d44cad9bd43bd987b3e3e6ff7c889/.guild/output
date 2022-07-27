@@ -1,0 +1,21 @@
+INFO: [numexpr.utils] NumExpr defaulting to 8 threads.
+FAVOR | face masks               121
+NONE | stay at home orders       111
+FAVOR | school closures           91
+AGAINST | stay at home orders     72
+AGAINST | face masks              51
+NONE | school closures            51
+NONE | face masks                 36
+AGAINST | school closures         35
+FAVOR | stay at home orders       32
+Name: groupkey, dtype: int64
+NONE | stay at home orders       686
+FAVOR | face masks               652
+FAVOR | school closures          526
+NONE | face masks                343
+AGAINST | stay at home orders    333
+AGAINST | face masks             324
+NONE | school closures           307
+AGAINST | school closures        217
+FAVOR | stay at home orders      168
+Name: groupkey, dtype: int64

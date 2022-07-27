@@ -1,0 +1,71 @@
+[stance1:inference] Activating env....
+Activating env [py38ptpl]
+guild_version:             0.8.0
+guild_install_location:    /home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/guild
+guild_home:                /home/serrano/projects/SMM4H22/tracking/.guild
+guild_resource_cache:      /home/serrano/projects/SMM4H22/tracking/.guild/cache/resources
+installed_plugins:         config_flags, cpu, dask, disk, dvc, exec_script, gpu, ipynb, keras, memory, perf, python_script, queue, skopt
+python_version:            3.8.13 (default, Mar 28 2022, 11:38:47) [GCC 7.5.0]
+python_exe:                /home/serrano/miniconda3/envs/py38ptpl/bin/python
+platform:                  Linux 4.18.0-193.el8.x86_64 x86_64
+psutil_version:            5.8.0
+tensorboard_version:       2.6.0
+cuda_version:              11.4
+nvidia_smi_version:        470.82.01
+latest_guild_version:      0.8.1
+A newer version of Guild AI is available. Run 'pip install guildai --upgrade' to install it.
+*** Check tha [guild_home] is correctly set ***
+===============================================
+*** Available operations (execute _guild help_ for more info) ***
+Refreshing flags...
+WARNING: cannot import flags from src/stance_preprocess.py: ModuleNotFoundError: No module named 'fasttext' (run with guild --debug for details)
+WARNING: cannot import flags from src/prepare_txts.py: ModuleNotFoundError: No module named 'negspacy' (run with guild --debug for details)
+prepare_data                      Generate Dataframes with hydrated examples from previously processed splits, texts, annotations
+prepare_splits                    Create a summary table with reference to all files and assign a split to each entry
+prepare_submission                from predictions in DF (subtask 2 & 3 ) generate ann files for submission
+prepare_task2_stance              Prepare official training data for stance Task2
+prepare_texts                     Preprocess txt files (clean, segment, etc.)
+base-model:evaluate               Run official evalation script
+stance1:inference                 apply transforemr
+stance1:inference-sentiment       apply transforemr
+stance1:pipeline_inference_event  
+stance1:train                     Train model Transformer based classifier
+Running script ....
+New Run
+Refreshing flags...
+WARNING: cannot import flags from src/stance_preprocess.py: ModuleNotFoundError: No module named 'fasttext' (run with guild --debug for details)
+WARNING: cannot import flags from src/prepare_txts.py: ModuleNotFoundError: No module named 'negspacy' (run with guild --debug for details)
+Resolving train dependency
+Using run 2b3bddece32c470c9f62fd394952c472 for train resource
+Resolving prepare_task2_stance dependency
+Using run e63d44cad9bd43bd987b3e3e6ff7c889 for prepare_task2_stance resource
+INFO: [numexpr.utils] Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+INFO: [numexpr.utils] NumExpr defaulting to 8 threads.
+INFO: [__main__] Available GPUs: 1
+INFO: [__main__] 
+=========  Loading model [digitalepidemiologylab/covid-twitter-bert-v2::/home/serrano/projects/SMM4H22/tracking/.guild/runs/2b3bddece32c470c9f62fd394952c472/checkpoints/best.ckpt]  ==========
+
+========= Classifier:: NumLabels [labels|3,Premise|2] ================
+Some weights of the model checkpoint at /home/serrano/projects/SMM4H22/tracking/.guild/runs/af7f2688c3424e0d985187675b004cd1/checkpoints/best were not used when initializing BertModel: ['classifier.bias', 'classifier.weight']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+INFO: [plibs.utils.transformers_utils] Using [cuda] device for inferring
+INFO: [__main__] 
+=========  Infering on [(525, 11)] using features: [['Claim2', 'tweet_text_clean']]  ==========
+  0%|          | 0/525 [00:00<?, ?it/s]  0%|          | 1/525 [00:00<01:49,  4.77it/s]  1%|          | 5/525 [00:00<00:28, 18.53it/s]  2%|▏         | 9/525 [00:00<00:19, 26.14it/s]  2%|▏         | 13/525 [00:00<00:16, 30.82it/s]  3%|▎         | 18/525 [00:00<00:14, 34.45it/s]  4%|▍         | 23/525 [00:00<00:13, 36.57it/s]  5%|▌         | 28/525 [00:00<00:13, 37.83it/s]  6%|▋         | 33/525 [00:01<00:12, 38.67it/s]  7%|▋         | 38/525 [00:01<00:12, 39.21it/s]  8%|▊         | 43/525 [00:01<00:12, 39.60it/s]  9%|▉         | 48/525 [00:01<00:11, 39.82it/s] 10%|█         | 53/525 [00:01<00:11, 39.97it/s] 11%|█         | 58/525 [00:01<00:11, 40.08it/s] 12%|█▏        | 63/525 [00:01<00:11, 40.18it/s] 13%|█▎        | 68/525 [00:01<00:11, 40.26it/s] 14%|█▍        | 73/525 [00:02<00:11, 40.28it/s] 15%|█▍        | 78/525 [00:02<00:11, 40.29it/s] 16%|█▌        | 83/525 [00:02<00:10, 40.27it/s] 17%|█▋        | 88/525 [00:02<00:10, 40.29it/s] 18%|█▊        | 93/525 [00:02<00:10, 40.32it/s] 19%|█▊        | 98/525 [00:02<00:10, 40.32it/s] 20%|█▉        | 103/525 [00:02<00:10, 40.31it/s] 21%|██        | 108/525 [00:02<00:10, 40.31it/s] 22%|██▏       | 113/525 [00:02<00:10, 40.30it/s] 22%|██▏       | 118/525 [00:03<00:10, 40.29it/s] 23%|██▎       | 123/525 [00:03<00:09, 40.32it/s] 24%|██▍       | 128/525 [00:03<00:09, 40.33it/s] 25%|██▌       | 133/525 [00:03<00:09, 40.32it/s] 26%|██▋       | 138/525 [00:03<00:09, 40.31it/s] 27%|██▋       | 143/525 [00:03<00:09, 40.34it/s] 28%|██▊       | 148/525 [00:03<00:09, 40.36it/s] 29%|██▉       | 153/525 [00:03<00:09, 40.34it/s] 30%|███       | 158/525 [00:04<00:09, 40.31it/s] 31%|███       | 163/525 [00:04<00:08, 40.32it/s] 32%|███▏      | 168/525 [00:04<00:08, 40.30it/s] 33%|███▎      | 173/525 [00:04<00:08, 40.34it/s] 34%|███▍      | 178/525 [00:04<00:08, 40.32it/s] 35%|███▍      | 183/525 [00:04<00:08, 40.32it/s] 36%|███▌      | 188/525 [00:04<00:08, 40.29it/s] 37%|███▋      | 193/525 [00:04<00:08, 40.32it/s] 38%|███▊      | 198/525 [00:05<00:08, 40.31it/s] 39%|███▊      | 203/525 [00:05<00:07, 40.29it/s] 40%|███▉      | 208/525 [00:05<00:07, 40.29it/s] 41%|████      | 213/525 [00:05<00:07, 40.29it/s] 42%|████▏     | 218/525 [00:05<00:07, 40.28it/s] 42%|████▏     | 223/525 [00:05<00:07, 40.28it/s] 43%|████▎     | 228/525 [00:05<00:07, 40.30it/s] 44%|████▍     | 233/525 [00:05<00:07, 40.31it/s] 45%|████▌     | 238/525 [00:06<00:07, 40.29it/s] 46%|████▋     | 243/525 [00:06<00:06, 40.31it/s] 47%|████▋     | 248/525 [00:06<00:06, 40.29it/s] 48%|████▊     | 253/525 [00:06<00:06, 40.27it/s] 49%|████▉     | 258/525 [00:06<00:06, 40.29it/s] 50%|█████     | 263/525 [00:06<00:06, 40.29it/s] 51%|█████     | 268/525 [00:06<00:06, 40.25it/s] 52%|█████▏    | 273/525 [00:06<00:06, 40.26it/s] 53%|█████▎    | 278/525 [00:07<00:06, 40.27it/s] 54%|█████▍    | 283/525 [00:07<00:06, 40.23it/s] 55%|█████▍    | 288/525 [00:07<00:05, 40.25it/s] 56%|█████▌    | 293/525 [00:07<00:05, 40.29it/s] 57%|█████▋    | 298/525 [00:07<00:05, 40.29it/s] 58%|█████▊    | 303/525 [00:07<00:05, 40.29it/s] 59%|█████▊    | 308/525 [00:07<00:05, 40.29it/s] 60%|█████▉    | 313/525 [00:07<00:05, 40.26it/s] 61%|██████    | 318/525 [00:08<00:05, 40.23it/s] 62%|██████▏   | 323/525 [00:08<00:05, 40.27it/s] 62%|██████▏   | 328/525 [00:08<00:04, 40.28it/s] 63%|██████▎   | 333/525 [00:08<00:04, 40.28it/s] 64%|██████▍   | 338/525 [00:08<00:04, 40.29it/s] 65%|██████▌   | 343/525 [00:08<00:04, 40.27it/s] 66%|██████▋   | 348/525 [00:08<00:04, 40.26it/s] 67%|██████▋   | 353/525 [00:08<00:04, 40.26it/s] 68%|██████▊   | 358/525 [00:09<00:04, 40.25it/s] 69%|██████▉   | 363/525 [00:09<00:04, 40.24it/s] 70%|███████   | 368/525 [00:09<00:03, 40.25it/s] 71%|███████   | 373/525 [00:09<00:03, 40.23it/s] 72%|███████▏  | 378/525 [00:09<00:03, 40.21it/s] 73%|███████▎  | 383/525 [00:09<00:03, 40.20it/s] 74%|███████▍  | 388/525 [00:09<00:03, 40.22it/s] 75%|███████▍  | 393/525 [00:09<00:03, 40.22it/s] 76%|███████▌  | 398/525 [00:10<00:03, 40.23it/s] 77%|███████▋  | 403/525 [00:10<00:03, 40.20it/s] 78%|███████▊  | 408/525 [00:10<00:02, 40.23it/s] 79%|███████▊  | 413/525 [00:10<00:02, 40.25it/s] 80%|███████▉  | 418/525 [00:10<00:02, 40.25it/s] 81%|████████  | 423/525 [00:10<00:02, 40.24it/s] 82%|████████▏ | 428/525 [00:10<00:02, 40.22it/s] 82%|████████▏ | 433/525 [00:10<00:02, 40.23it/s] 83%|████████▎ | 438/525 [00:11<00:02, 40.24it/s] 84%|████████▍ | 443/525 [00:11<00:02, 40.24it/s] 85%|████████▌ | 448/525 [00:11<00:01, 40.24it/s] 86%|████████▋ | 453/525 [00:11<00:01, 40.26it/s] 87%|████████▋ | 458/525 [00:11<00:01, 40.23it/s] 88%|████████▊ | 463/525 [00:11<00:01, 40.26it/s] 89%|████████▉ | 468/525 [00:11<00:01, 40.24it/s] 90%|█████████ | 473/525 [00:11<00:01, 40.24it/s] 91%|█████████ | 478/525 [00:12<00:01, 40.27it/s] 92%|█████████▏| 483/525 [00:12<00:01, 40.26it/s] 93%|█████████▎| 488/525 [00:12<00:00, 40.26it/s] 94%|█████████▍| 493/525 [00:12<00:00, 40.26it/s] 95%|█████████▍| 498/525 [00:12<00:00, 40.24it/s] 96%|█████████▌| 503/525 [00:12<00:00, 40.23it/s] 97%|█████████▋| 508/525 [00:12<00:00, 40.22it/s] 98%|█████████▊| 513/525 [00:12<00:00, 40.22it/s] 99%|█████████▊| 518/525 [00:13<00:00, 40.23it/s]100%|█████████▉| 523/525 [00:13<00:00, 39.96it/s]100%|██████████| 525/525 [00:13<00:00, 39.68it/s]
+     Unnamed: 0          id  ... stance_Premise_logits_1 stance_Premise_yhat
+0           540   790606768  ...                0.053887                   0
+1           444  1535035885  ...                0.000986                   0
+2           598      659269  ...                0.099187                   0
+3           451      230078  ...                0.166186                   0
+4           246      141134  ...                0.824782                   1
+..          ...         ...  ...                     ...                 ...
+520         515     3829322  ...                0.083813                   0
+521         390  4118663209  ...                0.019962                   0
+522         237     2061378  ...                0.875658                   1
+523          19  3165571378  ...                0.638378                   1
+524         234  2575742266  ...                0.002593                   0
+
+[525 rows x 18 columns]
+INFO: [__main__] ... Saving predictions to [predictions.tsv]
+---------- FINALIZED -------------

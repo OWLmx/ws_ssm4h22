@@ -1,0 +1,6 @@
+architecture: 64bit ELF
+cpus: 20
+processor: x86_64
+python_version: 3.8.13 (default, Mar 28 2022, 11:38:47) [GCC 7.5.0]
+uname: 'Linux icsnode12 4.18.0-193.el8.x86_64 #1 SMP Fri May 8 10:59:10 UTC 2020 x86_64
+  x86_64'

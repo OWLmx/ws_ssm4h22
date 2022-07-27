@@ -1,0 +1,159 @@
+BASH_ENV: /apps/Modules//init/bash
+BASH_FUNC__module_raw%%: "() {  unset _mlshdbg;\n if [ \"${MODULES_SILENT_SHELL_DEBUG:-0}\"\
+  \ = '1' ]; then\n case \"$-\" in \n *v*x*)\n set +vx;\n _mlshdbg='vx'\n ;;\n *v*)\n\
+  \ set +v;\n _mlshdbg='v'\n ;;\n *x*)\n set +x;\n _mlshdbg='x'\n ;;\n *)\n _mlshdbg=''\n\
+  \ ;;\n esac;\n fi;\n unset _mlre _mlIFS;\n if [ -n \"${IFS+x}\" ]; then\n _mlIFS=$IFS;\n\
+  \ fi;\n IFS=' ';\n for _mlv in ${MODULES_RUN_QUARANTINE:-};\n do\n if [ \"${_mlv}\"\
+  \ = \"${_mlv##*[!A-Za-z0-9_]}\" -a \"${_mlv}\" = \"${_mlv#[0-9]}\" ]; then\n if\
+  \ [ -n \"`eval 'echo ${'$_mlv'+x}'`\" ]; then\n _mlre=\"${_mlre:-}${_mlv}_modquar='`eval\
+  \ 'echo ${'$_mlv'}'`' \";\n fi;\n _mlrv=\"MODULES_RUNENV_${_mlv}\";\n _mlre=\"${_mlre:-}${_mlv}='`eval\
+  \ 'echo ${'$_mlrv':-}'`' \";\n fi;\n done;\n if [ -n \"${_mlre:-}\" ]; then\n eval\
+  \ `eval ${_mlre} /usr/bin/tclsh /apps/Modules/libexec/modulecmd.tcl bash '\"$@\"\
+  '`;\n else\n eval `/usr/bin/tclsh /apps/Modules/libexec/modulecmd.tcl bash \"$@\"\
+  `;\n fi;\n _mlstatus=$?;\n if [ -n \"${_mlIFS+x}\" ]; then\n IFS=$_mlIFS;\n else\n\
+  \ unset IFS;\n fi;\n unset _mlre _mlv _mlrv _mlIFS;\n if [ -n \"${_mlshdbg:-}\"\
+  \ ]; then\n set -$_mlshdbg;\n fi;\n unset _mlshdbg;\n return $_mlstatus\n}"
+BASH_FUNC_ml%%: '() {  module ml "$@"
+
+  }'
+BASH_FUNC_module%%: "() {  unset _mlshdbg;\n if [ \"${MODULES_SILENT_SHELL_DEBUG:-0}\"\
+  \ = '1' ]; then\n case \"$-\" in \n *v*x*)\n set +vx;\n _mlshdbg='vx'\n ;;\n *v*)\n\
+  \ set +v;\n _mlshdbg='v'\n ;;\n *x*)\n set +x;\n _mlshdbg='x'\n ;;\n *)\n _mlshdbg=''\n\
+  \ ;;\n esac;\n fi;\n unset _mlre _mlIFS;\n if [ -n \"${IFS+x}\" ]; then\n _mlIFS=$IFS;\n\
+  \ fi;\n IFS=' ';\n for _mlv in ${MODULES_RUN_QUARANTINE:-};\n do\n if [ \"${_mlv}\"\
+  \ = \"${_mlv##*[!A-Za-z0-9_]}\" -a \"${_mlv}\" = \"${_mlv#[0-9]}\" ]; then\n if\
+  \ [ -n \"`eval 'echo ${'$_mlv'+x}'`\" ]; then\n _mlre=\"${_mlre:-}${_mlv}_modquar='`eval\
+  \ 'echo ${'$_mlv'}'`' \";\n fi;\n _mlrv=\"MODULES_RUNENV_${_mlv}\";\n _mlre=\"${_mlre:-}${_mlv}='`eval\
+  \ 'echo ${'$_mlrv':-}'`' \";\n fi;\n done;\n if [ -n \"${_mlre:-}\" ]; then\n eval\
+  \ `eval ${_mlre} /usr/bin/tclsh /apps/Modules/libexec/modulecmd.tcl bash '\"$@\"\
+  '`;\n else\n eval `/usr/bin/tclsh /apps/Modules/libexec/modulecmd.tcl bash \"$@\"\
+  `;\n fi;\n _mlstatus=$?;\n if [ -n \"${_mlIFS+x}\" ]; then\n IFS=$_mlIFS;\n else\n\
+  \ unset IFS;\n fi;\n unset _mlre _mlv _mlrv _mlIFS;\n if [ -n \"${_mlshdbg:-}\"\
+  \ ]; then\n set -$_mlshdbg;\n fi;\n unset _mlshdbg;\n return $_mlstatus\n}"
+BASH_FUNC_switchml%%: "() {  typeset swfound=1;\n if [ \"${MODULES_USE_COMPAT_VERSION:-0}\"\
+  \ = '1' ]; then\n typeset swname='main';\n if [ -e /apps/Modules//libexec/modulecmd.tcl\
+  \ ]; then\n typeset swfound=0;\n unset MODULES_USE_COMPAT_VERSION;\n fi;\n else\n\
+  \ typeset swname='compatibility';\n if [ -e /apps/Modules//libexec/modulecmd-compat\
+  \ ]; then\n typeset swfound=0;\n MODULES_USE_COMPAT_VERSION=1;\n export MODULES_USE_COMPAT_VERSION;\n\
+  \ fi;\n fi;\n if [ $swfound -eq 0 ]; then\n echo \"Switching to Modules $swname\
+  \ version\";\n source /apps/Modules//init/bash;\n else\n echo \"Cannot switch to\
+  \ Modules $swname version, command not found\";\n return 1;\n fi\n}"
+CMD_DIR: /home/serrano/projects/SMM4H22
+CONDA_DEFAULT_ENV: py38ptpl
+CONDA_EXE: /home/serrano/miniconda3/bin/conda
+CONDA_PREFIX: /home/serrano/miniconda3/envs/py38ptpl
+CONDA_PROMPT_MODIFIER: '(py38ptpl) '
+CONDA_PYTHON_EXE: /home/serrano/miniconda3/bin/python
+CONDA_SHLVL: '1'
+CUDA_VISIBLE_DEVICES: '0'
+DBUS_SESSION_BUS_ADDRESS: unix:path=/run/user/1418002360/bus
+ENV: /apps/Modules//init/profile.sh
+ENVIRONMENT: BATCH
+FLAGS_DEST: args
+FLAG_INPUT_FEATURES: Claim2,tweet_text_clean
+FLAG_LABEL_MAPPER: ''
+FLAG_MODEL_PATH: /home/serrano/projects/SMM4H22/tracking/.guild/runs/2b3bddece32c470c9f62fd394952c472/checkpoints/best.ckpt
+FLAG_MODEL_TYPE: digitalepidemiologylab/covid-twitter-bert-v2
+FLAG_NUM_LABELS: '3'
+FLAG_OUTPUT_LOGITS: '1'
+FLAG_PREPARE_TASK2_STANCE: b5f1562d469847d5a396c59fffbf839f
+FLAG_RS_PREFIX: stance_
+FLAG_T10SEC: ''
+FLAG_TGTDATA_PATH: prepared/task2_test.tsv
+FLAG_TRAIN: 2b3bddece32c470c9f62fd394952c472
+GPU_DEVICE_ORDINAL: '0'
+GUILD_HOME: /home/serrano/projects/SMM4H22/tracking/.guild
+GUILD_OP: stance1:inference
+GUILD_PLUGINS: ''
+GUILD_SOURCECODE: .guild/sourcecode
+HISTCONTROL: ignoredups
+HISTSIZE: '1000'
+HOME: /home/serrano
+HOSTNAME: icsnode14
+LANG: en_US.utf-8
+LC_ADDRESS: en_US.UTF-8
+LC_IDENTIFICATION: en_US.UTF-8
+LC_MEASUREMENT: en_US.UTF-8
+LC_MONETARY: en_US.UTF-8
+LC_NAME: en_US.UTF-8
+LC_NUMERIC: en_US.UTF-8
+LC_PAPER: en_US.UTF-8
+LC_TELEPHONE: en_US.UTF-8
+LC_TIME: en_US.UTF-8
+LESSOPEN: '||/usr/bin/lesspipe.sh %s'
+LOADEDMODULES: ''
+LOGNAME: serrano
+LOG_LEVEL: '20'
+LS_COLORS: 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:'
+MAIL: /var/spool/mail/serrano
+MAMBA_EXE: /home/serrano/bin/micromamba
+MAMBA_ROOT_PREFIX: /home/serrano/miniconda3
+MANPATH: ':'
+MODULEPATH: /apps/Modules/modulefiles:/apps/app_modulefiles:/apps/spack_modulefiles/linux-centos8-haswell
+MODULEPATH_modshare: /apps/spack_modulefiles/linux-centos8-haswell:1:/apps/Modules/modulefiles:1:/apps/app_modulefiles:1
+MODULESHOME: /apps/Modules/
+MODULES_CMD: /apps/Modules/libexec/modulecmd.tcl
+NCCL_DEBUG: INFO
+OLDPWD: /home/serrano/projects
+PATH: /apps/Modules/bin:/apps/Modules/bin:/home/serrano/miniconda3/envs/py38ptpl/bin:/home/serrano/miniconda3/condabin:/apps/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/serrano/.local/bin:/home/serrano/bin:/home/serrano/.local/bin:/home/serrano/bin:/home/serrano/.local/bin:/home/serrano/bin
+PRJ_ENV: py38ptpl
+PRJ_HOME: /home/serrano/projects/SMM4H22
+PROJECT_DIR: /home/serrano/projects/SMM4H22
+PWD: /home/serrano/projects/SMM4H22
+PYTHONFAULTHANDLER: '1'
+PYTHONPATH: .guild/sourcecode:/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/guild/external:/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages
+ROCR_VISIBLE_DEVICES: '0'
+RUN_DIR: /home/serrano/projects/SMM4H22/tracking/.guild/runs/fab6956eeb234b41880b998d747b3735
+RUN_ID: fab6956eeb234b41880b998d747b3735
+SHELL: /bin/bash
+SHLVL: '3'
+SLURMD_NODENAME: icsnode14
+SLURM_CLUSTER_NAME: icscluster
+SLURM_CONF: /etc/slurm/slurm.conf
+SLURM_CPUS_ON_NODE: '1'
+SLURM_GTIDS: '0'
+SLURM_JOBID: '1258764'
+SLURM_JOB_ACCOUNT: usi
+SLURM_JOB_CPUS_PER_NODE: '1'
+SLURM_JOB_GID: '1418000513'
+SLURM_JOB_GPUS: '0'
+SLURM_JOB_ID: '1258764'
+SLURM_JOB_NAME: misinfo
+SLURM_JOB_NODELIST: icsnode14
+SLURM_JOB_NUM_NODES: '1'
+SLURM_JOB_PARTITION: gpu
+SLURM_JOB_QOS: normal
+SLURM_JOB_UID: '1418002360'
+SLURM_JOB_USER: serrano
+SLURM_LOCALID: '0'
+SLURM_MEM_PER_NODE: '32000'
+SLURM_NNODES: '1'
+SLURM_NODEID: '0'
+SLURM_NODELIST: icsnode14
+SLURM_NODE_ALIASES: (null)
+SLURM_NPROCS: '1'
+SLURM_NTASKS: '1'
+SLURM_NTASKS_PER_NODE: '1'
+SLURM_PRIO_PROCESS: '0'
+SLURM_PROCID: '0'
+SLURM_SUBMIT_DIR: /home/serrano/projects/SMM4H22
+SLURM_SUBMIT_HOST: icslogin01
+SLURM_TASKS_PER_NODE: '1'
+SLURM_TASK_PID: '89981'
+SLURM_TIME_FORMAT: relative
+SLURM_TOPOLOGY_ADDR: icsnode14
+SLURM_TOPOLOGY_ADDR_PATTERN: node
+SLURM_WORKING_CLUSTER: icscluster:icsmaster02:6817:8960:109
+SQUEUE_FORMAT: '%.10i %.10u %.9P %.8j %.2t %.12S %.12e %.9L %.6D %.20R %.9Q'
+SSH_CLIENT: 195.176.32.149 48774 22
+SSH_CONNECTION: 195.176.32.149 48774 195.176.181.120 22
+SSH_TTY: /dev/pts/1
+TERM: screen
+TMPDIR: /tmp
+TMUX: /tmp/tmux-1418002360/default,3302021,0
+TMUX_PANE: '%0'
+USER: serrano
+XDG_RUNTIME_DIR: /run/user/1418002360
+XDG_SESSION_ID: '7601'
+_CE_CONDA: ''
+_CE_M: ''

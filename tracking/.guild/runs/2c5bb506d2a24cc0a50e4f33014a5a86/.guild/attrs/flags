@@ -1,0 +1,11 @@
+input_features: tweet_text_clean
+label_mapper: 0|Negative,1|Neutral,2|Positive
+model_path: cardiffnlp/twitter-roberta-base-sentiment-latest
+model_type: cardiffnlp/twitter-roberta-base-sentiment-latest
+num_labels: 3
+output_logits: true
+prepare_task2_stance: e63d44cad9bd43bd987b3e3e6ff7c889
+rs_prefix: ''
+t10sec: false
+tgtdata_path: prepared/task2_train.tsv,prepared/task2_valid.tsv,prepared/task2_test.tsv
+train: e889d14d42464147a3629f0fbeabe5f5

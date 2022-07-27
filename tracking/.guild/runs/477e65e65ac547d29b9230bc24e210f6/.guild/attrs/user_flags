@@ -1,0 +1,2 @@
+for_inference: true
+in_path: /home/owlmx/research/comps/SMM4H22/data/input/task2/only_validationset

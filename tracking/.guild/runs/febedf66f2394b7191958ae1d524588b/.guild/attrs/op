@@ -1,0 +1,44 @@
+delete-on-success: false
+deps:
+- config: e889d14d42464147a3629f0fbeabe5f5
+  location: /home/serrano/projects/SMM4H22
+  name: train
+  sources:
+  - operation: train
+    select: .*checkpoints\/best\/.+\.*
+    target-path: model
+    target-type: link
+- config: b5f1562d469847d5a396c59fffbf839f
+  location: /home/serrano/projects/SMM4H22
+  name: prepare_task2_stance
+  sources:
+  - operation: prepare_task2_stance
+    select: .*prepared\/.+\.(tsv|pkl)
+    target-path: prepared
+    target-type: link
+flag-null-labels:
+  prepare_task2_stance: unspecified
+  train: unspecified
+flags-extra: {}
+label-template: null
+op-cmd:
+  cmd-args:
+  - ${python_exe}
+  - -um
+  - guild.op_main
+  - src/infer-cls_with_transformer
+  - --
+  - __flag_args__
+  cmd-env:
+    FLAGS_DEST: args
+    GUILD_PLUGINS: ''
+    PROJECT_DIR: /home/serrano/projects/SMM4H22
+  cmd-flags:
+    prepare_task2_stance:
+      arg-skip: true
+    train:
+      arg-skip: true
+  flags-dest: args
+output-scalars: null
+python-requires: null
+sourcecode-root: .guild/sourcecode

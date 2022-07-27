@@ -1,0 +1,10 @@
+input_features: tweet_text_clean,Claim2
+label_mapper: ''
+model_path: model
+model_type: microsoft/deberta-large-mnli
+num_labels: 3
+output_logits: true
+prepare_task2_stance: 0630eecbf38740e4983d0646a8d12a76
+t10sec: false
+tgtdata_path: prepared/task2_test.tsv,prepared/task2_valid.tsv
+train: e21e499257324d6381c27d5918f092fe

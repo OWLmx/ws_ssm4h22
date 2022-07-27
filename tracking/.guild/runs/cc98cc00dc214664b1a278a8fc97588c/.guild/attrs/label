@@ -1,0 +1,4 @@
+data_official_test stance_as_nli stance task2 input_features=tweet_text_clean,Claim2
+  label_mapper='' model_path=model model_type=microsoft/deberta-large-mnli num_labels=3
+  output_logits=yes prepare_task2_stance=66142fb128694006bdd49264dd6f3e8b t10sec=no
+  tgtdata_path=prepared/task2_test.tsv train=e21e499257324d6381c27d5918f092fe

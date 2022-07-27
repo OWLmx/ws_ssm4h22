@@ -1,0 +1,15 @@
+- /home/owlmx/miniconda3/envs/py38ptpl/bin/python3.8
+- -um
+- guild.op_main
+- src/stance_preprocess
+- --
+- --dataset_type
+- kglandt_nli
+- --for_inference
+- '1'
+- --in_path
+- /home/owlmx/research/comps/SMM4H22/data/input/task2/only_validationset
+- --out_path
+- prepared
+- --t10sec
+- ''

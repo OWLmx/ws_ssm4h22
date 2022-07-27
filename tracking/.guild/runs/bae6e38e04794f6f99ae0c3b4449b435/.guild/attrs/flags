@@ -1,0 +1,6 @@
+inference: fab6956eeb234b41880b998d747b3735
+original_data: /home/owlmx/research/comps/SMM4H22/data/input/task2/official_test/test.tsv
+prediction_data: predictions.tsv
+subtask: 2a
+t10sec: false
+yhat_field: stance_labels_yhat

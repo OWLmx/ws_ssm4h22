@@ -3,6 +3,8 @@
 .vscode/**
 
 
-tracking/**
+# tracking/** 
+tracking/**/*.bin 
+tracking/**/*.ckpt 
 *.bin
 *.pkl

@@ -1,0 +1,2 @@
+"dataset_type=kglandt_nli for_inference=yes in_path=/\u2026/only_validationset out_path=prepared\
+  \ t10sec=no"

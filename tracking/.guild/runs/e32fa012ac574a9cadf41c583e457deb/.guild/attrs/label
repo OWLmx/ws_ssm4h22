@@ -1,0 +1,3 @@
+"submission ct-bert_two-stage official_data_test task2 stance two-stage data_covidlies-official\
+  \ inference=febedf66f2394b7191958ae1d524588b original_data=/home/\u2026/test.tsv\
+  \ prediction_data=predictions.tsv subtask=2a t10sec=no"

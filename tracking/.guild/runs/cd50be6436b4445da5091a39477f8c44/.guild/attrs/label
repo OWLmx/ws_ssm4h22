@@ -1,0 +1,5 @@
+input_features=Claim2,tweet_text_clean label_mapper=0|AGAINST,1|FAVOR,2|NONE model_path=model
+  model_type=digitalepidemiologylab/covid-twitter-bert-v2 num_labels=3 output_logits=yes
+  prepare_task2_stance=7abbe21a34b14b7d9e4939128a374892 rs_prefix=stance_ t10sec=no
+  tgtdata_path=/home/owlmx/research/comps/SMM4H22/data/prepared/task2_train_predictions.tsv,/home/owlmx/research/comps/SMM4H22/data/prepared/task2_valid_predictions.tsv,/home/owlmx/research/comps/SMM4H22/data/prepared/task2_test_predictions.tsv
+  train=e889d14d42464147a3629f0fbeabe5f5

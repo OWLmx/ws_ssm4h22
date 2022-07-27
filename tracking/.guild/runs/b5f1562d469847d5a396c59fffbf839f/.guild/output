@@ -1,0 +1,2 @@
+INFO: [numexpr.utils] NumExpr defaulting to 8 threads.
+Warning : `load_model` does not return WordVectorModel or SupervisedModel any more, but a `FastText` object which is very similar.
