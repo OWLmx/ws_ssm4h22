@@ -1,0 +1,4 @@
+outs:
+- md5: 4624bf42f294dccb2d5e8018ccea65b6
+  size: 4043183720
+  path: model_01_1690_0.88.ckpt

@@ -1,0 +1,8 @@
+prepare_task2_stance:
+  operation:prepare_task2_stance:
+    config: 6d4c5793a53c4ff2bf830020a0248f0f
+    paths:
+    - ../6d4c5793a53c4ff2bf830020a0248f0f/prepared/task2_test.tsv
+    - ../6d4c5793a53c4ff2bf830020a0248f0f/prepared/task2_train.tsv
+    - ../6d4c5793a53c4ff2bf830020a0248f0f/prepared/task2_valid.tsv
+    uri: operation:prepare_task2_stance

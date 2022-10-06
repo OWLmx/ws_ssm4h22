@@ -1,0 +1,6 @@
+prepare_task2_stance:
+  operation:prepare_task2_stance:
+    config: b5f1562d469847d5a396c59fffbf839f
+    paths:
+    - ../b5f1562d469847d5a396c59fffbf839f/prepared/task2_test.tsv
+    uri: operation:prepare_task2_stance

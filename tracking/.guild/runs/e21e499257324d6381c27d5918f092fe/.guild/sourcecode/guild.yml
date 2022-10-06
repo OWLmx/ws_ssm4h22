@@ -1,0 +1,358 @@
+
+# - include: guild_base_models.yml
+
+- config: shared-resources
+  sourcecode:
+    - include: 'src/'
+    - exclude: '.dvcignore'
+    - exclude: 'data/'
+    - exclude: 'notebooks/'
+    - exclude: 'models/'
+  resources:
+    data-input-train:
+      - file: data/input/trainingdata_v3/train
+        select: .+\.ann
+        target-type: link
+        target-path: input/train
+    data-input-test:
+      - file: data/input/trainingdata_v3/dev
+        select: .+\.ann
+        target-type: link
+        target-path: input/test
+    data-input-files:
+      - file: data/input/trainingdata_v3
+        select: .+\.(txt|ann)
+        target-type: link
+        target-path: input/files        
+        
+- config: log-flags
+  name: Configuration of logs
+  flags:
+    logs_path: 
+      description: Path where tensorboard logs will be written (for PL). Relative to the project's home
+      default: tracking/tensorboard_logs
+
+# -------------------------- General ops an base-model (abstract)   ----------------------------------------
+-           
+  extends: shared-resources
+  operations:
+    prepare_task2_stance:
+      description: Prepare official training data for stance Task2
+      main: src/stance_preprocess
+      flags-import: all
+      flags:
+        t10sec: False
+        in_path: /home/owlmx/research/comps/SMM4H22/data/input/task2
+        out_path: prepared
+      # requires:
+      #   - data-input-train
+      #   - data-input-test
+    # offcial CMED.pdf => The remaining annotations in 400 notes are split into 75% for training, 5% for development and 20% for test.
+    prepare_splits:
+      description: Create a summary table with reference to all files and assign a split to each entry
+      main: src/prepare_splits
+      flags-import: all
+      flags:
+        t10sec: False
+        in_dirs: input/train,input/test
+        out_dir: prepared
+      requires:
+        - data-input-train
+        - data-input-test
+    prepare_texts:
+      description: Preprocess txt files (clean, segment, etc.)
+      main: src/prepare_txts
+      flags-import: all
+      flags:
+        t10sec: False
+        in_dir: input/files
+        out_dir: prepared
+        # strategy: SpacySentences
+        strategy: SpacySentencesPlusFeats
+        spacy_model: en_core_web_sm
+        # spacy_model: en_core_sci_scibert
+        using_char_span: False
+      requires:
+        - data-input-files
+    prepare_data:
+      description: Generate Dataframes with hydrated examples from previously processed splits, texts, annotations   
+      main: src/prepare_data
+      flags-import: all
+      flags:
+        t10sec: False
+        prepared_splits: prepared/splits.tsv
+        prepared_annots: prepared/annotations.tsv
+        prepared_texts: prepared/segments.tsv
+        out_dir: prepared        
+      requires:
+        - operation: prepare_splits
+          select: .+\.tsv
+          target-path: prepared
+          target-type: link
+        - operation: prepare_texts
+          select: .+\.tsv
+          target-path: prepared          
+          target-type: link
+
+    prepare_submission:
+      description: from predictions in DF (subtask 2 & 3 ) generate ann files for submission
+      main: src/prepare_submission
+      flags-import: all
+      flags: 
+        t10sec: False
+        # previous_stage_anns_dir: /home/owlmx/research/comps/n2c2/data/input/trainingdata_v3/dev
+        # previous_stage_anns_dir: /home/owlmx/research/comps/n2c2/data/input/test_official/stage1/ner_run3
+        # prediction_data: /home/owlmx/research/comps/n2c2/tracking/.guild/runs/508db64fea51461bb078a738c220831e/predictions.tsv
+        # previous_stage_anns_dir: /home/owlmx/research/comps/n2c2/data/input/test_official/stage2/release2
+        previous_stage_anns_dir: /home/owlmx/research/comps/n2c2/data/input/test_official/stage3/release3
+        prediction_data: predictions.tsv
+        # event_pred: ev1_yhat
+        # event_pred: evvani1_yhat
+        # event_label_mapper: 0|Disposition,1|NoDisposition,2|Undetermined
+        # event_pred: ev47ab65ee_yhat_label
+        # event_pred: ensemble_yhat
+        # event_pred: event_yhat_label
+
+        attr_actor_pred: actor_yhat_label
+        attr_actor_label_mapper: 
+        attr_action_pred: action_yhat_label
+        attr_action_label_mapper: 
+        attr_certainty_pred: certainty_yhat_label
+        attr_certainty_label_mapper: 
+        attr_negation_pred: negation_yhat_label
+        attr_negation_label_mapper: 
+        attr_temporality_pred: temporality_yhat_label        
+        attr_temporality_label_mapper:         
+
+        # attr_actor_pred: multilab_actor_yhat
+        # attr_actor_label_mapper: 0|Patient,1|Physician,2|Unknown
+        # attr_action_pred: multilab_action_yhat
+        # attr_action_label_mapper: 0|Decrease,1|Increase,2|OtherChange,3|Start,4|Stop,5|UniqueDose,6|Unknown
+        # attr_certainty_pred: multilab_certainty_yhat
+        # attr_certainty_label_mapper: 0|Certain,1|Conditional,2|Hypothetical,3|Unknown
+        # attr_negation_pred: multilab_negation_yhat
+        # attr_negation_label_mapper: 0|Negated,1|NotNegated
+        # attr_temporality_pred: multilab_temporality_yhat        
+        # attr_temporality_label_mapper: 0|Future,1|Past,2|Present,3|Unknown
+
+        subtask: 3
+        # test_gs_dir: /home/owlmx/research/comps/n2c2/data/input/trainingdata_v3/dev
+        test_gs_dir: submission_stage2 # just for sanity check
+        # test_gs_dir: /home/owlmx/research/comps/n2c2/data/input/test_official/stage3/release3  # just for sanity check
+        # columIdT: tgt
+        columIdT: id
+      requires:
+        - operation: inference
+          select: predictions\.tsv
+          # target-path: prepared
+          target-type: link
+      output-scalars:
+        - 'Drug +(\value) +(\value) +(\value) +(?P<Ner_prec>\value) +(?P<Ner_recall>\value) +(?P<Ner_f1>\value)'
+        - 'Evt_Overall \(micro\) +(\value) +(\value) +(\value) +(?P<Evt_m_prec>\value) +(?P<Evt_m_recall>\value) +(?P<Evt_m_f1>\value)'
+        - 'Evt_Overall \(macro\) +(\value) +(\value) +(\value) +(?P<Evt_M_prec>\value) +(?P<Evt_M_recall>\value) +(?P<Evt_M_f1>\value)'
+        - 'Ctx_Overall \(micro\) +(\value) +(\value) +(\value) +(?P<Ctx_m_prec>\value) +(?P<Ctx_m_recall>\value) +(?P<Ctx_m_f1>\value)'
+        - 'Ctx_Overall \(macro\) +(\value) +(\value) +(\value) +(?P<Ctx_M_prec>\value) +(?P<Ctx_M_recall>\value) +(?P<Ctx_M_f1>\value)'
+        - 'Combined +(\value) +(\value) +(\value) +(?P<Comb_prec>\value) +(?P<Comb_recall>\value) +(?P<Comb_f1>\value)'
+
+
+
+
+- model: base-model
+  extends: shared-resources
+  operations:
+    evaluate:
+      description: Run official evalation script
+      main: src/eval_script
+      flags-import: all
+      flags:
+        folder1: gs_set
+        folder2: gs_set
+      output-scalars:        
+        - 'Evt_Overall \(micro\) +(\value) +(\value) +(\value) +(?P<Evt_m_prec>\value) +(?P<Evt_m_recall>\value) +(?P<Evt_m_f1>\value)'
+        - 'Evt_Overall \(macro\) +(\value) +(\value) +(\value) +(?P<Evt_M_prec>\value) +(?P<Evt_M_recall>\value) +(?P<Evt_M_f1>\value)'
+        - 'Ctx_Overall \(micro\) +(\value) +(\value) +(\value) +(?P<Ctx_m_prec>\value) +(?P<Ctx_m_recall>\value) +(?P<Ctx_m_f1>\value)'
+        - 'Ctx_Overall \(macro\) +(\value) +(\value) +(\value) +(?P<Ctx_M_prec>\value) +(?P<Ctx_M_recall>\value) +(?P<Ctx_M_f1>\value)'
+        - 'Combined +(\value) +(\value) +(\value) +(?P<Comb_prec>\value) +(?P<Comb_recall>\value) +(?P<Comb_f1>\value)'
+
+
+# --------------------------------  EVENT models (experiments)  ----------------------------------
+
+
+
+- model: stance1
+  extends: shared-resources
+  description: stance classification 1
+  operations:
+    train:
+      description: Train model Transformer based classifier 
+      main: src/seqcls_transformer_train
+      flags:
+        $include:
+          - log-flags
+        t10sec: False
+        gpus: 0
+        model_name_or_path: 
+          description: Name or path of the pretrained model to be used
+          #default: distilbert-base-uncased
+          #default: digitalepidemiologylab/covid-twitter-bert-v2
+          #default: /home/serrano/projects/SMM4H22/tracking/.guild/runs/af7f2688c3424e0d985187675b004cd1/checkpoints/best
+          #default: /home/serrano/projects/SMM4H22/tracking/.guild/runs/e889d14d42464147a3629f0fbeabe5f5/checkpoints/best # third-fine tuning?
+          default: microsoft/deberta-large-mnli 
+        tokenizer_type: microsoft/deberta-large-mnli #digitalepidemiologylab/covid-twitter-bert-v2
+        task_name: stance_as_nli #joint_sentclaim_premise_extrasentiment # joint_sentclaim_premise #sentclaim_sentiment #sentclaim #covidlies
+        max_seq_length: 200 # 160
+        # train_batch_size: 8
+        train_batch_size: 4
+        eval_batch_size: 16
+        encoder_learning_rate: 1e-05
+        # learning_rate: 2e-5
+        learning_rate: 1e-05
+        # warmup_steps: 700
+        warmup_steps: 
+          default: 0
+          # default: 3000
+          description: if < 0 then is interpreted as percentage
+        max_epochs: 20
+        adam_epsilon: 1e-3
+        patience: 5
+        auto_lr_find:
+          description: Enables the pytorch-lightning's task of automatic finding a good LR 
+          default: False
+        data_dirpath: 
+          description: Path of the directory where the datafiles are located
+          default: prepared
+          #default: /home/serrano/projects/SMM4H22/tracking/.guild/runs/2c5bb506d2a24cc0a50e4f33014a5a86
+        data_filename_prefix:
+          description: Datafile's name without the suffix related to the split identification
+          default: task2_ 
+          #default: covidlies_ 
+        data_filename_type: 
+          description: Type of data files (csv | tsv | pkl )
+          default: tsv
+        # data_split_train:
+        #   description: Suffix that identfies the split, if None the split won't be used
+        #   default: train
+        # data_split_valid:
+        #   description: Suffix that identfies the split, if None the split won't be used
+        #   default: valid
+        # data_split_test:
+        #   description: Suffix that identfies the split, if None the split won't be used
+        #   default: test
+        # fold_data_file: texts_processed.csv
+        # fold_test: 6
+        # fold_valid: 4
+        use_weights_of: Null
+        # use_weights_of: /home/serrano/projects/misinfocovid_wp2/tracking/.guild/runs/86deb642eb644c348d759ed3d2f0f3b1/checkpoints/best_model.ckpt
+        stratified_batch_sampling: True
+        # fields_transformations:  text|mask_term
+        label_encoder: Null
+      requires:
+        - operation: prepare_task2_stance
+          select: .*prepared\/.+\.(tsv|pkl)
+          target-path: prepared
+          target-type: link
+
+
+    inference:
+      description: apply transforemr 
+      main: src/infer-cls_with_transformer
+      flags:
+        t10sec: False
+        # tgtdata_path: /home/owlmx/idsia/misinfofastcatch_wp1/data/input/covid_infodemic/covid19_infodemic_english_data_extended.tsv
+        #tgtdata_path: prepared/task2_test.tsv #prepared/segments.tsv
+        #tgtdata_path: /home/serrano/projects/SMM4H22/tracking/.guild/runs/4cf3056b00ce4ba9ae52ab96a41f57ad/predictions.tsv # inference of official data enriched with sentiment logits
+        tgtdata_path: /home/serrano/projects/SMM4H22/tracking/.guild/runs/2c5bb506d2a24cc0a50e4f33014a5a86/task2_test.tsv # inference on train data (test split) enriched with sentiment logits
+        #model_path: model
+        #model_path: /home/serrano/projects/SMM4H22/tracking/.guild/runs/2b3bddece32c470c9f62fd394952c472/checkpoints/best.ckpt
+        model_path: /home/serrano/projects/SMM4H22/tracking/.guild/runs/485e5eed397e473395558198417e5c4d/checkpoints/best.ckpt
+        model_type: digitalepidemiologylab/covid-twitter-bert-v2
+        num_labels: 3
+        input_features: Claim2,tweet_text_clean
+        extra_features: logits_0,logits_1,logits_2
+        #label_mapper: 0|AGAINST,1|FAVOR,2|NONE
+        label_mapper: Null
+        output_logits: yes
+        rs_prefix: "stance_"
+      requires:
+        - operation: train
+          select: .*checkpoints\/best\/.+\.*
+          target-path: model
+          target-type: link
+        - operation: prepare_task2_stance
+          select: .*prepared\/.+\.(tsv|pkl)
+          target-path: prepared
+          target-type: link
+
+
+    inference-sentiment:
+      description: apply transforemr 
+      main: src/infer-cls_with_transformer
+      flags:
+        t10sec: False
+        # tgtdata_path: /home/owlmx/idsia/misinfofastcatch_wp1/data/input/covid_infodemic/covid19_infodemic_english_data_extended.tsv
+        tgtdata_path: prepared/task2_test.tsv
+        model_path: cardiffnlp/twitter-roberta-base-sentiment-latest
+        model_type: cardiffnlp/twitter-roberta-base-sentiment-latest
+        num_labels: 3
+        input_features: tweet_text_clean
+        label_mapper: 0|Negative,1|Neutral,2|Positive 
+        output_logits: yes
+        rs_prefix: ""
+      requires:
+        - operation: train
+          select: .*checkpoints\/best\/.+\.*
+          target-path: model
+          target-type: link
+        - operation: prepare_task2_stance
+          select: .*prepared\/.+\.(tsv|pkl)
+          target-path: prepared
+          target-type: link          
+          
+
+
+
+
+    pipeline_inference_event:
+      flags:
+        t10sec: False
+      steps:
+      - run: inference 
+        isolate-runs: no
+        flags:
+          rs_prefix: evvani1_
+          # tgtdata_path: /home/serrano/projects/n2c2/tracking/.guild/runs/4a600f191bc24f7d8c442328c3f4c4a4/prepared/stage2_train.pkl
+          tgtdata_path: prepared/segments.tsv
+          model_path: /home/owlmx/research/comps/n2c2/models/event/CMED_clinicalsingle_new_pair
+          model_type: self
+          input_features: text,term
+          label_mapper: 
+      - run: inference 
+        isolate-runs: no
+        flags:
+          rs_prefix: evc4dab27b_    # Bio_ClinicalBERT + text|mask_term + stratified batch
+          tgtdata_path: prepared/predictions.tsv
+          train: c4dab27bbdae44808261e2461d30f0e6
+          model_type: emilyalsentzer/Bio_ClinicalBERT
+          input_features: text
+          fields_transformations: text|mask_term
+      - run: inference 
+        isolate-runs: no
+        flags:
+          rs_prefix: ev674e7f47_    # mimiciii_bert_10e_128b + text|mask_term + stratified batch
+          tgtdata_path: prepared/predictions.tsv
+          train: 674e7f47993d451191531e5e992e553b
+          model_type: /home/owlmx/research/comps/n2c2/models/external/mimiciii_bert_10e_128b
+          input_features: text
+          fields_transformations: text|mask_term
+      - run: inference 
+        isolate-runs: no
+        flags:
+          rs_prefix: ev47ab65ee_    # mimiciii_roberta_10e_128b + text|mask_term + stratified batch
+          tgtdata_path: prepared/predictions.tsv
+          train: 47ab65eecf204caa8d7d7c29581ad0c2
+          model_type: /home/owlmx/research/comps/n2c2/models/external/mimiciii_roberta_10e_128b
+          input_features: text
+          fields_transformations: text|mask_term               
+
+ 
+# ------------------------------------------------------------------  

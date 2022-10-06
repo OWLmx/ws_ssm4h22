@@ -1,0 +1,149 @@
+[stance1:train] Activating env....
+Activating env [py38ptpl]
+guild_version:             0.8.0
+guild_install_location:    /home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/guild
+guild_home:                /home/serrano/projects/SMM4H22/tracking/.guild
+guild_resource_cache:      /home/serrano/projects/SMM4H22/tracking/.guild/cache/resources
+installed_plugins:         config_flags, cpu, dask, disk, dvc, exec_script, gpu, ipynb, keras, memory, perf, python_script, queue, skopt
+python_version:            3.8.13 (default, Mar 28 2022, 11:38:47) [GCC 7.5.0]
+python_exe:                /home/serrano/miniconda3/envs/py38ptpl/bin/python
+platform:                  Linux 4.18.0-193.el8.x86_64 x86_64
+psutil_version:            5.8.0
+tensorboard_version:       2.6.0
+cuda_version:              11.4
+nvidia_smi_version:        470.82.01
+latest_guild_version:      0.8.1
+A newer version of Guild AI is available. Run 'pip install guildai --upgrade' to install it.
+*** Check tha [guild_home] is correctly set ***
+===============================================
+*** Available operations (execute _guild help_ for more info) ***
+Refreshing flags...
+WARNING: cannot import flags from src/stance_preprocess.py: ModuleNotFoundError: No module named 'fasttext' (run with guild --debug for details)
+WARNING: cannot import flags from src/prepare_txts.py: ModuleNotFoundError: No module named 'negspacy' (run with guild --debug for details)
+prepare_data                      Generate Dataframes with hydrated examples from previously processed splits, texts, annotations
+prepare_splits                    Create a summary table with reference to all files and assign a split to each entry
+prepare_submission                from predictions in DF (subtask 2 & 3 ) generate ann files for submission
+prepare_task2_stance              Prepare official training data for stance Task2
+prepare_texts                     Preprocess txt files (clean, segment, etc.)
+base-model:evaluate               Run official evalation script
+stance1:inference                 apply transforemr
+stance1:inference-sentiment       apply transforemr
+stance1:pipeline_inference_event  
+stance1:train                     Train model Transformer based classifier
+Running script ....
+New Run
+Refreshing flags...
+WARNING: cannot import flags from src/stance_preprocess.py: ModuleNotFoundError: No module named 'fasttext' (run with guild --debug for details)
+WARNING: cannot import flags from src/prepare_txts.py: ModuleNotFoundError: No module named 'negspacy' (run with guild --debug for details)
+Resolving prepare_task2_stance dependency
+Using run e63d44cad9bd43bd987b3e3e6ff7c889 for prepare_task2_stance resource
+INFO: [numexpr.utils] Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+INFO: [numexpr.utils] NumExpr defaulting to 8 threads.
+==> Setting [max_epochs] to 1 due to t10sec var
+INFO: [pytorch_lightning.utilities.seed] Global seed set to 42
+*** t10sec
+Reading dataset.
+**Training Data size: 22
+Prepared for [0] extra features
+
+========= Classifier:: NumLabels [labels|3,Premise|2] ================
+Some weights of the model checkpoint at /home/serrano/projects/SMM4H22/tracking/.guild/runs/af7f2688c3424e0d985187675b004cd1/checkpoints/best were not used when initializing BertModel: ['classifier.weight', 'classifier.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Configuring TensorLogger output to --> /home/serrano/projects/SMM4H22/tracking/tensorboard_logs
+INFO: [pytorch_lightning.utilities.rank_zero] Multiprocessing is handled by SLURM.
+INFO: [pytorch_lightning.utilities.rank_zero] GPU available: True, used: True
+INFO: [pytorch_lightning.utilities.rank_zero] TPU available: False, using: 0 TPU cores
+INFO: [pytorch_lightning.utilities.rank_zero] IPU available: False, using: 0 IPUs
+INFO: [pytorch_lightning.utilities.rank_zero] HPU available: False, using: 0 HPUs
+INFO: [root] ... Setup [fit]
+Reading dataset.
+INFO: [root] 
+---- Mapping split [train] -----
+  0%|          | 0/1 [00:00<?, ?ba/s]100%|██████████| 1/1 [00:00<00:00, 75.52ba/s]
+INFO: [root] 
+---- Mapping split [validation] -----
+  0%|          | 0/1 [00:00<?, ?ba/s]100%|██████████| 1/1 [00:00<00:00, 79.62ba/s]
+INFO: [plibs.estimators.sequence_classifier_mtl] --> SetUp Model ** fit :: device cpu [<class 'torch.device'>]
+/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py:2203: LightningDeprecationWarning: `Trainer.gpus` was deprecated in v1.6 and will be removed in v1.8. Please use `Trainer.num_devices` or `Trainer.device_ids` to get device information instead.
+  rank_zero_deprecation(
+INFO: [pytorch_lightning.accelerators.gpu] LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+INFO: [plibs.estimators.sequence_classifier_mtl] *** Prepare optimizer and schedule (linear warmup and decay)  ***
+INFO: [plibs.estimators.sequence_classifier_mtl] Optimizer LR: 1e-05 EPS: 0.001
+INFO: [plibs.estimators.sequence_classifier_mtl] Only Optimizer --> AdamW (
+Parameter Group 0
+    betas: (0.9, 0.999)
+    correct_bias: True
+    eps: 0.001
+    lr: 1e-05
+    weight_decay: 0.0
+
+Parameter Group 1
+    betas: (0.9, 0.999)
+    correct_bias: True
+    eps: 0.001
+    lr: 1e-05
+    weight_decay: 0.0
+)
+INFO: [pytorch_lightning.callbacks.model_summary] 
+  | Name         | Type                                          | Params
+-------------------------------------------------------------------------------
+0 | custom_model | ModelForSequenceClassificationMtlPlusFeatures | 338 M 
+-------------------------------------------------------------------------------
+338 M     Trainable params
+0         Non-trainable params
+338 M     Total params
+1,353.183 Total estimated model params size (MB)
+INFO: [pytorch_lightning.trainer.connectors.signal_connector] SLURM auto-requeueing enabled. Setting signal handlers.
+Sanity Checking: 0it [00:00, ?it/s]Sanity Checking DataLoader 0:   0%|          | 0/2 [00:00<?, ?it/s]DEBUG: [plibs.estimators.model_seqcls_mtl] Pooled output:: torch.Size([16, 1024]) | cuda:0)
+Traceback (most recent call last):
+  File "/home/serrano/projects/SMM4H22/tracking/.guild/runs/5b72215a5b88426aaa30c45b50820322/.guild/sourcecode/src/seqcls_transformer_train.py", line 202, in <module>
+    main(args)
+  File "/home/serrano/projects/SMM4H22/tracking/.guild/runs/5b72215a5b88426aaa30c45b50820322/.guild/sourcecode/src/seqcls_transformer_train.py", line 141, in main
+    trainer.fit(model, data) # ckpt_path (Optional[str]) – Path/URL of the checkpoint from which training is resumed
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 771, in fit
+    self._call_and_handle_interrupt(
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 724, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 812, in _fit_impl
+    results = self._run(model, ckpt_path=self.ckpt_path)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1237, in _run
+    results = self._run_stage()
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1324, in _run_stage
+    return self._run_train()
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1346, in _run_train
+    self._run_sanity_check()
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1414, in _run_sanity_check
+    val_loop.run()
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/base.py", line 204, in run
+    self.advance(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/dataloader/evaluation_loop.py", line 153, in advance
+    dl_outputs = self.epoch_loop.run(self._data_fetcher, dl_max_batches, kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/base.py", line 204, in run
+    self.advance(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 127, in advance
+    output = self._evaluation_step(**kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 222, in _evaluation_step
+    output = self.trainer._call_strategy_hook("validation_step", *kwargs.values())
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1766, in _call_strategy_hook
+    output = fn(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/pytorch_lightning/strategies/strategy.py", line 344, in validation_step
+    return self.model.validation_step(*args, **kwargs)
+  File "/home/serrano/projects/SMM4H22/tracking/.guild/runs/5b72215a5b88426aaa30c45b50820322/.guild/sourcecode/src/plibs/estimators/sequence_classifier_mtl.py", line 165, in validation_step
+    metrics_output = self.valid_metrics[task](yhat, ytrue)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torchmetrics/collections.py", line 112, in forward
+    return {k: m(*args, **m._filter_kwargs(**kwargs)) for k, m in self.items()}
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torchmetrics/collections.py", line 112, in <dictcomp>
+    return {k: m(*args, **m._filter_kwargs(**kwargs)) for k, m in self.items()}
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torchmetrics/metric.py", line 206, in forward
+    self.update(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torchmetrics/metric.py", line 267, in wrapped_func
+    return update(*args, **kwargs)
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torchmetrics/classification/accuracy.py", line 260, in update
+    self.tp += tp
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+                                                                   ---------- FINALIZED -------------

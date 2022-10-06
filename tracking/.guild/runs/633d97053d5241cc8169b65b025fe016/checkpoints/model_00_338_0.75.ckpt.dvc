@@ -1,0 +1,4 @@
+outs:
+- md5: ac38ca1503d8fe10c67fe689558451c0
+  size: 4875004066
+  path: model_00_338_0.75.ckpt

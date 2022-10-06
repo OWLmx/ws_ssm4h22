@@ -1,0 +1,7 @@
+data_official stance_as_nli stance task2 adam_epsilon=0.001 auto_lr_find=no data_dirpath=prepared
+  data_filename_prefix=task2_ data_filename_type=tsv encoder_learning_rate=1.0e-05
+  eval_batch_size=16 gpus='0' label_encoder='' learning_rate=1.0e-05 logs_path=tracking/tensorboard_logs
+  max_epochs=20 max_seq_length=200 model_name_or_path=microsoft/deberta-large-mnli
+  patience=5 prepare_task2_stance=2b5145fb4ce0413a90e24ac39581a1b2 stratified_batch_sampling=yes
+  t10sec=0 task_name=stance_as_nli tokenizer_type=microsoft/deberta-large-mnli train_batch_size=4
+  use_weights_of='' warmup_steps=0

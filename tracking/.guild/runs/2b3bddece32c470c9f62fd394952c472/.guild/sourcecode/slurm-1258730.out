@@ -1,0 +1,63 @@
+[stance1:train] Activating env....
+Activating env [py38ptpl]
+guild_version:             0.8.0
+guild_install_location:    /home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/guild
+guild_home:                /home/serrano/projects/SMM4H22/tracking/.guild
+guild_resource_cache:      /home/serrano/projects/SMM4H22/tracking/.guild/cache/resources
+installed_plugins:         config_flags, cpu, dask, disk, dvc, exec_script, gpu, ipynb, keras, memory, perf, python_script, queue, skopt
+python_version:            3.8.13 (default, Mar 28 2022, 11:38:47) [GCC 7.5.0]
+python_exe:                /home/serrano/miniconda3/envs/py38ptpl/bin/python
+platform:                  Linux 4.18.0-193.el8.x86_64 x86_64
+psutil_version:            5.8.0
+tensorboard_version:       2.6.0
+cuda_version:              11.4
+nvidia_smi_version:        470.82.01
+latest_guild_version:      0.8.1
+A newer version of Guild AI is available. Run 'pip install guildai --upgrade' to install it.
+*** Check tha [guild_home] is correctly set ***
+===============================================
+*** Available operations (execute _guild help_ for more info) ***
+Refreshing flags...
+WARNING: cannot import flags from src/stance_preprocess.py: ModuleNotFoundError: No module named 'fasttext' (run with guild --debug for details)
+WARNING: cannot import flags from src/prepare_txts.py: ModuleNotFoundError: No module named 'negspacy' (run with guild --debug for details)
+prepare_data                      Generate Dataframes with hydrated examples from previously processed splits, texts, annotations
+prepare_splits                    Create a summary table with reference to all files and assign a split to each entry
+prepare_submission                from predictions in DF (subtask 2 & 3 ) generate ann files for submission
+prepare_task2_stance              Prepare official training data for stance Task2
+prepare_texts                     Preprocess txt files (clean, segment, etc.)
+base-model:evaluate               Run official evalation script
+stance1:inference                 apply transforemr
+stance1:inference-sentiment       apply transforemr
+stance1:pipeline_inference_event  
+stance1:train                     Train model Transformer based classifier
+Running script ....
+New Run
+Refreshing flags...
+WARNING: cannot import flags from src/stance_preprocess.py: ModuleNotFoundError: No module named 'fasttext' (run with guild --debug for details)
+WARNING: cannot import flags from src/prepare_txts.py: ModuleNotFoundError: No module named 'negspacy' (run with guild --debug for details)
+Resolving prepare_task2_stance dependency
+Using run e63d44cad9bd43bd987b3e3e6ff7c889 for prepare_task2_stance resource
+INFO: [numexpr.utils] Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+INFO: [numexpr.utils] NumExpr defaulting to 8 threads.
+==> Setting [max_epochs] to 1 due to t10sec var
+INFO: [pytorch_lightning.utilities.seed] Global seed set to 42
+*** t10sec
+Reading dataset.
+**Training Data size: 22
+Prepared for [0] extra features
+
+========= Classifier:: NumLabels [labels|3,Premise|2] ================
+Some weights of the model checkpoint at /home/serrano/projects/SMM4H22/tracking/.guild/runs/af7f2688c3424e0d985187675b004cd1/checkpoints/best were not used when initializing BertModel: ['classifier.weight', 'classifier.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Traceback (most recent call last):
+  File "/home/serrano/projects/SMM4H22/tracking/.guild/runs/9b50854747314067ad4c7a212917cf5e/.guild/sourcecode/src/seqcls_transformer_train.py", line 202, in <module>
+    main(args)
+  File "/home/serrano/projects/SMM4H22/tracking/.guild/runs/9b50854747314067ad4c7a212917cf5e/.guild/sourcecode/src/seqcls_transformer_train.py", line 78, in main
+    model = Model(**dict_args)
+  File "/home/serrano/projects/SMM4H22/tracking/.guild/runs/9b50854747314067ad4c7a212917cf5e/.guild/sourcecode/src/plibs/estimators/sequence_classifier_mtl.py", line 95, in __init__
+    self.valid_metrics[task].to('gpu')
+  File "/home/serrano/miniconda3/envs/py38ptpl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 880, in to
+    device, dtype, non_blocking, convert_to_format = torch._C._nn._parse_to(*args, **kwargs)
+RuntimeError: Expected one of cpu, cuda, xpu, mkldnn, opengl, opencl, ideep, hip, ve, ort, mlc, xla, lazy, vulkan, meta, hpu device type at start of device string: gpu
+---------- FINALIZED -------------

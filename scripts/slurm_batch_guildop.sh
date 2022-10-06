@@ -15,8 +15,6 @@
 
 # activate conda env
 . ~/miniconda3/etc/profile.d/conda.sh
-# source activate $1
-# conda activate py37ptpl
 echo "[$1] Activating env...."
 . env_activate.sh
 
@@ -36,13 +34,6 @@ export TOKENIZERS_PARALLELISM=false
 
 # run script 
 echo "Running script ...."
-# srun python3 train.py
-# srun python3 train_intent_cls_transformer.py --strategy=ddp --gpus=1 --data_dirpath=data/input/intents/ --data_filename_prefix=intent_compilation4_ --max_seq_length=250 --warmup_steps=5000
-#--t10sec=1000
-#--t10sec=False
-# guild run -q -y stance:train_cls1 &
-# guild run -y stance:train_cls1
-# guild run -y $1
 if [ -z "$2" ]
   then
     echo "New Run"
@@ -51,6 +42,5 @@ if [ -z "$2" ]
     echo "Restarting Run [$2]"
     guild run -y $1 --force-sourcecode --restart $2
 fi
-
 
 echo "---------- FINALIZED -------------"

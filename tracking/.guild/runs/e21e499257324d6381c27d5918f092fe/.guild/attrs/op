@@ -1,0 +1,33 @@
+delete-on-success: false
+deps:
+- config: 2b5145fb4ce0413a90e24ac39581a1b2
+  location: /home/serrano/projects/SMM4H22
+  name: prepare_task2_stance
+  sources:
+  - operation: prepare_task2_stance
+    select: .*prepared\/.+\.(tsv|pkl)
+    target-path: prepared
+    target-type: link
+flag-null-labels:
+  prepare_task2_stance: unspecified
+flags-extra: {}
+label-template: null
+op-cmd:
+  cmd-args:
+  - ${python_exe}
+  - -um
+  - guild.op_main
+  - src/seqcls_transformer_train
+  - --
+  - __flag_args__
+  cmd-env:
+    FLAGS_DEST: args
+    GUILD_PLUGINS: ''
+    PROJECT_DIR: /home/serrano/projects/SMM4H22
+  cmd-flags:
+    prepare_task2_stance:
+      arg-skip: true
+  flags-dest: args
+output-scalars: null
+python-requires: null
+sourcecode-root: .guild/sourcecode
