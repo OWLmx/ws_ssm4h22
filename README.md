@@ -8,6 +8,7 @@ It includes Task-2
 
 * [Task 2](https://codalab.lisn.upsaclay.fr/competitions/5067) – Classification of stance and premise in tweets about health mandates related to COVID-19 (in English)
   - [Poster](ssm4h_mattica_20220929b.pdf)
+  - [Paper](https://aclanthology.org/2022.smm4h-1.22/)
 
 
 ## This repository
